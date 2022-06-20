@@ -7,23 +7,37 @@ function usage()
   echo "  build.sh [options] site_name"
   echo "options:"
   echo "  -e              Perform experimental build, not nightly"
+  echo "  -c              Perform continuous build, not nightly"
+  echo "  -f              Perform build/test on continuous build even if no update"
   echo "  -p reg_exp      Build products/branches matching regular expression"
+  echo "  -C string       Build specific config or config list"
   echo "  -x              Do not build external products (ITK, VTK)"
+  echo "  -K              Force clean build (delete build directories)"
+  echo "  -T              Skip the test step (only configure/build/package)"
 }
 
 # Which model to build
 MODEL=Nightly
 PRODUCT_MASK=
 SKIP_EXTERNAL=
+FORCE_CLEAN=
+FORCE_CONTINUOUS=
+SKIP_TESTING=
 
 # Parse options
-while getopts ":ep:hx" opt; do
+while getopts ":ecfKTp:C:hx" opt; do
   case $opt in
     e)
       MODEL=Experimental
       ;;
+    c)
+      MODEL=Continuous
+      ;;
     p)
       PRODUCT_MASK="$OPTARG"
+      ;;
+    C)
+      CUSTOM_CONFIG_LIST="$OPTARG"
       ;;
     h)
       usage
@@ -31,6 +45,15 @@ while getopts ":ep:hx" opt; do
       ;;
     x)
       SKIP_EXTERNAL=TRUE
+      ;;
+    f)
+      FORCE_CONTINUOUS=TRUE
+      ;;
+    K)
+      FORCE_CLEAN=TRUE
+      ;;
+    T)
+      SKIP_TESTING=TRUE
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -63,6 +86,11 @@ echo "Building model $MODEL at site ${1?}"
 # Read the global script
 source $SITESCRIPT
 
+# Override config list
+if [[ $CUSTOM_CONFIG_LIST ]]; then
+  CONFIG_LIST="$CUSTOM_CONFIG_LIST"
+fi
+
 # Update the CDASH repository automatically
 pushd cdash
 $GIT_BINARY pull
@@ -79,6 +107,9 @@ fi
 $CMAKE_BINARY_PATH/ctest -V \
   -D PRODUCT_MASK:STRING="${PRODUCT_MASK}" \
   -D SKIP_EXTERNAL:BOOL=${SKIP_EXTERNAL} \
+  -D FORCE_CLEAN:BOOL=${FORCE_CLEAN} \
+  -D SKIP_TESTING:BOOL=${SKIP_TESTING} \
+  -D FORCE_CONTINUOUS:BOOL=${FORCE_CONTINUOUS} \
   -D GIT_BINARY:STRING="${GIT_BINARY}" \
   -D GIT_UID:STRING="${GIT_UID}" \
   -D CONFIG_LIST:STRING="${CONFIG_LIST}" \

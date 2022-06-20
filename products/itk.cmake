@@ -21,6 +21,13 @@ IF(WIN32)
 ENDIF(WIN32)
 
 # Skip special qt4 builds
-IF(${CONFIG_EXT} MATCHES ".*qt4.*")
+MESSAGE(STATUS "CONFIG_EXT=${CONFIG_EXT}")
+IF((${CONFIG_EXT} MATCHES ".*qt4.*") OR (${CONFIG_EXT} MATCHES ".*osmesa.*"))
   SET(SKIP_BUILD ON)
-ENDIF(${CONFIG_EXT} MATCHES ".*qt4.*")
+ENDIF()
+
+# Set max/min GCC version
+IF(${IN_BRANCH} MATCHES "4.*")
+  SET(GCC_MAX "7")
+ENDIF()
+
