@@ -76,14 +76,14 @@ IF "%1"=="-K" (
 )
 
 set SITE=%1
-set SITESCRIPT="cdash\\sites\\%SITE%\\vars.bat"
+set SITESCRIPT="itksnap-cdash\\sites\\%SITE%\\vars.bat"
 
 rem Check the location
 IF "%SITE%"=="" (
   echo "Site must be specified as parameter to this script"
   goto :end
 )
-IF NOT EXIST cdash\build_robot.cmake (
+IF NOT EXIST .\itksnap-cdash\build_robot.cmake (
   echo "You seem to be running this script in the wrong directory"
   goto :end
 )
@@ -97,9 +97,11 @@ echo "Building model %MODEL% at site %SITE%
 CALL "%SITESCRIPT%"
 
 echo Updating the CDASH repo
-pushd cdash
+cd itksnap-cdash
+pushd itksnap-cdash
 "%GIT_BINARY%" pull
 popd
+cd ..
 
 "%CMAKE_BINARY_PATH%/ctest.exe" -V ^
   -D PRODUCT_MASK:STRING=%PRODUCT_MASK% ^
@@ -113,7 +115,7 @@ popd
   -D CMAKE_BINARY_PATH:PATH="%CMAKE_BINARY_PATH%" ^
   -D IN_GLOBAL_MODEL:STRING=%MODEL% ^
   -D IN_SITE:STRING=%SITE% ^
-  -S cdash\build_robot.cmake
+  -S .\itksnap-cdash\build_robot.cmake
 
 
 :end
