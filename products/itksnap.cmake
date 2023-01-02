@@ -1,6 +1,6 @@
 # DESCRIBE THE PRODUCT
 SET(PRODUCT_CHECKOUT_COMMAND 
-  "${GIT_BINARY} clone -b ${IN_BRANCH} --recursive https://github.com/pyushkevich/itksnap.git ${IN_PRODUCT}")
+  "${GIT_BINARY} clone -b ${IN_BRANCH} --recursive https://github.com/jilei-hao/itksnap.git ${IN_PRODUCT}")
 
 # Init all GUI toolkits to OFF
 SET(NEED_QT4 OFF)

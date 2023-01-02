@@ -1,3 +1,5 @@
 # Temp files
 *~
 .*.sw?
+/.vs
+/.vscode
