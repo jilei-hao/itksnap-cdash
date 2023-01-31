@@ -66,13 +66,13 @@ shift $(($OPTIND-1))
 
 # Make sure a machine was specified
 SITE=$1
-SITESCRIPT="./cdash/sites/$SITE/vars.sh"
+SITESCRIPT="./itksnap-cdash/sites/$SITE/vars.sh"
 
 # Check the location
 if [[ ! $SITE ]]; then
   echo "Site must be specified as parameter to this script!" >&2
   exit -1
-elif [[ ! -f ./cdash/build_robot.cmake ]]; then
+elif [[ ! -f ./itksnap-cdash/build_robot.cmake ]]; then
   echo "You seem to be running this script in the wrong directory" >&2
   exit -1
 elif [[ ! -f $SITESCRIPT ]]; then
@@ -92,7 +92,7 @@ if [[ $CUSTOM_CONFIG_LIST ]]; then
 fi
 
 # Update the CDASH repository automatically
-pushd cdash
+pushd itksnap-cdash
 $GIT_BINARY pull
 rc=$?
 popd 
@@ -116,4 +116,4 @@ $CMAKE_BINARY_PATH/ctest -V \
   -D CMAKE_BINARY_PATH:PATH="${CMAKE_BINARY_PATH}" \
   -D IN_GLOBAL_MODEL:STRING=$MODEL \
   -D IN_SITE:STRING=$SITE \
-  -S ./cdash/build_robot.cmake
+  -S ./itksnap-cdash/build_robot.cmake
