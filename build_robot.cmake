@@ -24,6 +24,8 @@
 #    to the ITK-SNAP Dashboard, located at itksnap.org/cdash
 #
 
+message(STATUS "build_robot started")
+
 # Include some macro code
 INCLUDE(${CTEST_SCRIPT_DIRECTORY}/include/macros.cmake)
 
@@ -46,6 +48,7 @@ SET(INTERNAL_PRODUCTS
 # ---------------------------------------
 # Parse the parameter settings
 # ---------------------------------------
+
 
 # Make sure the required variables are set for the site
 CHECK_SITE_VAR(IN_GLOBAL_MODEL)

@@ -103,8 +103,13 @@ if [[ $rc -ne 0 ]]; then
   exit -1
 fi
 
+echo "starting build script"
+echo "cmake binary path=${CMAKE_BINARY_PATH}"
+echo "site = ${SITE}"
+echo "product = ${PRODUCT_MASK}"
+
 # Execute the build script
-$CMAKE_BINARY_PATH/ctest -V \
+$CMAKE_BINARY_PATH/ctest -VV \
   -D PRODUCT_MASK:STRING="${PRODUCT_MASK}" \
   -D SKIP_EXTERNAL:BOOL=${SKIP_EXTERNAL} \
   -D FORCE_CLEAN:BOOL=${FORCE_CLEAN} \

@@ -38,10 +38,10 @@ CACHE_ADD("BUILD_SHARED_LIBS:BOOL=TRUE" PRODUCT "vtk" CONFIG "xc64dbg")
 CACHE_ADD("BUILD_SHARED_LIBS:BOOL=TRUE" PRODUCT "itksnap" CONFIG "xc64dbg")
 
 # Support for code signing
-CACHE_ADD("SNAP_MACOSX_CODESIGN_CERT:STRING=Developer ID Application: Paul Yushkevich (5A636Q488D)")
+#CACHE_ADD("SNAP_MACOSX_CODESIGN_CERT:STRING=Developer ID Application: Paul Yushkevich (5A636Q488D)")
 
 # Library directory: path where all the libraries are build (this is only used internally)
-SET(TKDIR "/Users/pauly/tk")
+#SET(TKDIR "/Users/pauly/tk")
 
 # Add product-specific cache entries
 IF(NEED_QT6)
