@@ -103,7 +103,7 @@ pushd itksnap-cdash
 popd
 cd ..
 
-"%CMAKE_BINARY_PATH%/ctest.exe" -V ^
+"%CMAKE_BINARY_PATH%/ctest.exe" -VV ^
   -D PRODUCT_MASK:STRING=%PRODUCT_MASK% ^
   -D SKIP_EXTERNAL:BOOL=%SKIP_EXTERNAL% ^
   -D FORCE_CLEAN:BOOL=%FORCE_CLEAN% ^

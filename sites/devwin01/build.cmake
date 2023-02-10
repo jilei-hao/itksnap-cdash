@@ -10,6 +10,7 @@
 
 # This site uploads its builds
 SETCOND(DO_UPLOAD ON CONFIG "vce64rel")
+CACHE_ADD("SCP_USERNAME:STRING=jileihao")
 
 # Library directory: path where all the libraries are build (this is only used internally)
 SET(TKDIR "${HOME}/../tk")
