@@ -1,7 +1,9 @@
 # DESCRIBE THE PRODUCT
-SET(PRODUCT_CHECKOUT_COMMAND 
-  "${GIT_BINARY} clone -b ${IN_BRANCH} --recursive https://github.com/jilei-hao/itksnap.git ${IN_PRODUCT}")
 
+SET(PRODUCT_CHECKOUT_COMMAND 
+  "${GIT_BINARY} clone -b ${IN_BRANCH} --recursive https://github.com/pyushkevich/itksnap.git ${IN_PRODUCT}")
+
+MESSAGE("PRODUCT_CHECKOUT_COMMAND" ${PRODUCT_CHECKOUT_COMMAND})
 # Init all GUI toolkits to OFF
 SET(NEED_QT4 OFF)
 SET(NEED_FLTK OFF)
@@ -18,6 +20,8 @@ IF(${CONFIG_EXT} MATCHES ".*qt4.*")
   SETCOND(SKIP_BUILD ON BRANCH rel_3.2)
   SETCOND(SKIP_BUILD ON BRANCH master)
   SETCOND(SKIP_BUILD ON BRANCH vtk9qt6)
+  SETCOND(SKIP_BUILD ON BRANCH rel_4.0)
+  SETCOND(SKIP_BUILD ON BRANCH rot_via_main_tform)
 
   # Set the cache entry
   CACHE_ADD("SNAP_USE_QT4:BOOLEAN=ON")
@@ -35,6 +39,8 @@ ELSE(${CONFIG_EXT} MATCHES ".*qt4.*")
   SETCOND(NEED_QT56 ON BRANCH "rel_3.8")
   SETCOND(NEED_QT6 ON BRANCH "master")
   SETCOND(NEED_QT6 ON BRANCH "vtk9qt6")
+  SETCOND(NEED_QT6 ON BRANCH "rel_4.0")
+  SETCOND(NEED_QT6 ON BRANCH "rot_via_main_tform")
 
 ENDIF(${CONFIG_EXT} MATCHES ".*qt4.*")
 
@@ -53,6 +59,8 @@ CACHE_ADD("ITK_DIR:PATH=${ROOT}/Nightly/itk/v4.8.2/${CONFIG_BASE}" BRANCH "rel_3
 CACHE_ADD("ITK_DIR:PATH=${ROOT}/Nightly/itk/v4.13.2/${CONFIG_BASE}" BRANCH "rel_3.8")
 CACHE_ADD("ITK_DIR:PATH=${ROOT}/Nightly/itk/v5.2.1/${CONFIG_BASE}" BRANCH "master")
 CACHE_ADD("ITK_DIR:PATH=${ROOT}/Nightly/itk/v5.2.1/${CONFIG_BASE}" BRANCH "vtk9qt6")
+CACHE_ADD("ITK_DIR:PATH=${ROOT}/Nightly/itk/v5.2.1/${CONFIG_BASE}" BRANCH "rel_4.0")
+CACHE_ADD("ITK_DIR:PATH=${ROOT}/Nightly/itk/v5.2.1/${CONFIG_BASE}" BRANCH "rot_via_main_tform")
 
 CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v5.8.0/${CONFIG_BASE}" BRANCH "rel_2.4")
 CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v6.1.0/${CONFIG_BASE}" BRANCH "rel_3.2")
@@ -60,6 +68,9 @@ CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v6.1.0/${CONFIG_BASE}" BRANCH "rel_3
 CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v6.3.0/${CONFIG_BASE}" BRANCH "rel_3.6")
 CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v6.3.0/${CONFIG_BASE}" BRANCH "rel_3.8")
 
+
 # VTK config matches ITKSNAP config
 CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v9.1.0/${IN_CONFIG}" BRANCH "master")
 CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v9.1.0/${IN_CONFIG}" BRANCH "vtk9qt6")
+CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v9.1.0/${IN_CONFIG}" BRANCH "rel_4.0")
+CACHE_ADD("VTK_DIR:PATH=${ROOT}/Nightly/vtk/v9.1.0/${IN_CONFIG}" BRANCH "rot_via_main_tform")

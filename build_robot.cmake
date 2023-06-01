@@ -39,6 +39,8 @@ SET(EXTERNAL_PRODUCTS
 
 SET(INTERNAL_PRODUCTS
   "itksnap master"
+  "itksnap rel_4.0"
+  "itksnap rot_via_main_tform"
   "greedy master"
   "c3d master"
   "cmrep vtk9")
@@ -72,6 +74,9 @@ SET(IN_PRODUCT)
 # Generate the build list
 SET(BUILD_LIST)
 
+MESSAGE("===PRODUCT MASK: ${PRODUCT_MASK}")
+MESSAGE("===INTERNAL_PRODUCTS: ${INTERNAL_PRODUCTS}")
+
 IF(NOT PRODUCT_MASK)
   SET(PRODUCT_MASK ".*")
 ENDIF(NOT PRODUCT_MASK)
@@ -96,6 +101,7 @@ MESSAGE("==================== PRODUCT LIST ====================")
 FOREACH(PROD ${BUILD_LIST})
   MESSAGE(" --> ${PROD}")
 ENDFOREACH(PROD)
+MESSAGE("== END OF PRODUCT LIST")
 
 # The build of each product is implemented as a function in order to
 # have a clean scope for each product built
